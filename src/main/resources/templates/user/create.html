@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:replace="/fragments/fragment :: #header"></div>
+<div th:replace="/fragments/fragment :: #nav"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Thêm nhân viên mới</h3>
+                    <form name='registerForm' th:action="@{/user/create}" method='POST' enctype="multipart/form-data" th:object="${user}">
+                        <div class="form-group">
+                            <label for="fullname">Họ và tên</label>
+                            <input type='text' th:field="*{fullname}" class="form-control" id="fullname" required />
+                            <p th:if="${#fields.hasErrors('fullname')}"
+                               th:errors="*{fullname}"
+                               th:class="error-message">Lỗi tên</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Tên đăng nhập</label>
+                            <input type='text' th:field="*{username}" class="form-control" id="username" required />
+                            <p th:if="${#fields.hasErrors('username')}"
+                               th:errors="*{username}"
+                               th:class="error-message">Lỗi tên đăng nhập</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <input type='password' th:field="*{password}" class="form-control" id="password" required />
+                            <p th:if="${#fields.hasErrors('password')}"
+                               th:errors="*{password}"
+                               th:class="error-message">Lỗi mật khẩu</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type='text' th:field="*{email}" class="form-control" id="email" required />
+                            <p th:if="${#fields.hasErrors('email')}"
+                               th:errors="*{email}"
+                               th:class="error-message">Lỗi email</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type='text' th:field="*{phone}" class="form-control" id="phone" required />
+                            <p th:if="${#fields.hasErrors('phone')}"
+                               th:errors="*{phone}"
+                               th:class="error-message">Lỗi số điện thoại</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type='text' th:field="*{address}" class="form-control" id="address" required />
+                            <p th:if="${#fields.hasErrors('phone')}"
+                               th:errors="*{phone}"
+                               th:class="error-message">Lỗi địa chỉ</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">Chức vụ</label>
+                            <select name="role" id="role" class="form-control" required>
+                                <option th:each="role : ${roleList}"
+                                        th:value="${role.id}"
+                                        th:text="${role.description}"
+                                        th:field="*{role}">
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="avatar" id="avatar-label">Ảnh đại diện</label>
+                            <input type="file" th:field="*{path}" id="avatar" accept="image/*" required>
+                        </div>
+                        <br>
+                        <div>
+                            <button name="submit" type="submit" class="btn btn-primary btn-block">Thêm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="/fragments/fragment :: #footerRelative"></div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
